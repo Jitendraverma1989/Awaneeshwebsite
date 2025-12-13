@@ -1,0 +1,8 @@
+<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="300" fill="#3B82F6"/>
+  <text x="200" y="130" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle">Predictive</text>
+  <text x="200" y="160" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle">Analytics Engine</text>
+  <circle cx="160" cy="210" r="20" fill="#ffffff" opacity="0.3"/>
+  <circle cx="200" cy="210" r="25" fill="#ffffff" opacity="0.5"/>
+  <circle cx="240" cy="210" r="20" fill="#ffffff" opacity="0.3"/>
+</svg>
