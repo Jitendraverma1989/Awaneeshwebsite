@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Grade 4 Math Word Problems - Practice fun, real-world math for 4th grade students in the USA">
+    <title>Grade 4 Math Word Problems | Vap Tech Solutions</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <style>
+        /* ── Math Problems Page Styles ── */
+        .math-hero {
+            background: linear-gradient(135deg, #0F172A 0%, #1E40AF 60%, #3B82F6 100%);
+            padding: 120px 0 60px;
+            text-align: center;
+            color: #fff;
+        }
+        .math-hero h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+        .math-hero h1 span {
+            color: #93C5FD;
+        }
+        .math-hero p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 1.5rem;
+        }
+        .grade-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        /* ── Score board ── */
+        .score-board {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            padding: 1.5rem 0 2.5rem;
+            flex-wrap: wrap;
+        }
+        .score-item {
+            text-align: center;
+            background: rgba(255,255,255,0.12);
+            border-radius: 12px;
+            padding: 0.8rem 1.8rem;
+            min-width: 120px;
+        }
+        .score-item .score-number {
+            font-size: 2rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+        .score-item .score-label {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* ── Quiz container ── */
+        .quiz-section {
+            padding: 60px 0 80px;
+            background: #F8FAFC;
+        }
+        .quiz-wrapper {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        .progress-bar-wrap {
+            background: #E2E8F0;
+            border-radius: 50px;
+            height: 10px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #1E40AF, #3B82F6);
+            border-radius: 50px;
+            transition: width 0.4s ease;
+            width: 0%;
+        }
+        .question-counter {
+            font-size: 0.85rem;
+            color: #64748B;
+            text-align: right;
+            margin-bottom: 0.25rem;
+        }
+
+        /* ── Question card ── */
+        .question-card {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(15,23,42,0.08);
+            padding: 2rem 2.5rem;
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+        .question-card.active {
+            display: block;
+            animation: fadeSlideUp 0.35s ease;
+        }
+        @keyframes fadeSlideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .question-topic {
+            display: inline-block;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: #1E40AF;
+            background: #DBEAFE;
+            padding: 0.25rem 0.8rem;
+            border-radius: 50px;
+            margin-bottom: 1rem;
+        }
+        .question-text {
+            font-size: 1.15rem;
+            color: #0F172A;
+            font-weight: 600;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        .question-illustration {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        /* ── Answer options ── */
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.85rem;
+        }
+        @media (max-width: 500px) {
+            .options-grid { grid-template-columns: 1fr; }
+        }
+        .option-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: #F8FAFC;
+            border: 2px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 0.85rem 1.1rem;
+            font-size: 1rem;
+            color: #1E293B;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+        .option-btn:hover:not(:disabled) {
+            border-color: #3B82F6;
+            background: #EFF6FF;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59,130,246,0.15);
+        }
+        .option-btn .option-letter {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #E2E8F0;
+            font-weight: 700;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+            transition: all 0.2s ease;
+        }
+        .option-btn.correct {
+            border-color: #10B981;
+            background: #ECFDF5;
+        }
+        .option-btn.correct .option-letter {
+            background: #10B981;
+            color: #fff;
+        }
+        .option-btn.wrong {
+            border-color: #EF4444;
+            background: #FEF2F2;
+        }
+        .option-btn.wrong .option-letter {
+            background: #EF4444;
+            color: #fff;
+        }
+        .option-btn:disabled {
+            cursor: not-allowed;
+        }
+
+        /* ── Feedback ── */
+        .feedback-box {
+            display: none;
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            margin-top: 1.25rem;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        .feedback-box.correct {
+            background: #ECFDF5;
+            border-left: 4px solid #10B981;
+            color: #065F46;
+            display: block;
+        }
+        .feedback-box.wrong {
+            background: #FEF2F2;
+            border-left: 4px solid #EF4444;
+            color: #991B1B;
+            display: block;
+        }
+        .feedback-box strong {
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        /* ── Navigation buttons ── */
+        .quiz-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+        }
+        .btn-quiz {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.7rem 1.6rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+        .btn-quiz-primary {
+            background: linear-gradient(135deg, #1E40AF, #3B82F6);
+            color: #fff;
+            box-shadow: 0 4px 12px rgba(59,130,246,0.35);
+        }
+        .btn-quiz-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(59,130,246,0.45);
+        }
+        .btn-quiz-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .btn-quiz-secondary {
+            background: #E2E8F0;
+            color: #1E293B;
+        }
+        .btn-quiz-secondary:hover {
+            background: #CBD5E1;
+        }
+
+        /* ── Results screen ── */
+        .results-screen {
+            display: none;
+            text-align: center;
+            padding: 3rem 2rem;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(15,23,42,0.08);
+        }
+        .results-screen.show {
+            display: block;
+            animation: fadeSlideUp 0.5s ease;
+        }
+        .results-emoji {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        .results-screen h2 {
+            font-size: 1.8rem;
+            color: #0F172A;
+            margin-bottom: 0.5rem;
+        }
+        .results-screen .results-score-big {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #1E40AF;
+            line-height: 1;
+            margin: 1rem 0;
+        }
+        .results-screen p {
+            color: #64748B;
+            font-size: 1rem;
+            max-width: 420px;
+            margin: 0 auto 1.5rem;
+        }
+        .results-breakdown {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+        .rb-item {
+            text-align: center;
+        }
+        .rb-item .rb-num {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+        .rb-item .rb-num.green  { color: #10B981; }
+        .rb-item .rb-num.red    { color: #EF4444; }
+        .rb-item .rb-label {
+            font-size: 0.8rem;
+            color: #64748B;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* ── Tips section ── */
+        .tips-section {
+            padding: 60px 0;
+            background: #fff;
+        }
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .tip-card {
+            background: #F8FAFC;
+            border-radius: 14px;
+            padding: 1.5rem;
+            border-left: 4px solid #3B82F6;
+        }
+        .tip-card .tip-icon {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+        }
+        .tip-card h4 {
+            color: #0F172A;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        .tip-card p {
+            color: #64748B;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        /* ensure page question-card text doesn't clash with styles.css */
+        .question-card h3 { color: #0F172A; }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <img src="images/logo.jpeg" alt="Vap Tech Solutions" class="logo">
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html#home" class="nav-link">Home</a></li>
+                <li><a href="index.html#services" class="nav-link">Services</a></li>
+                <li><a href="index.html#portfolio" class="nav-link">Portfolio</a></li>
+                <li><a href="index.html#why-us" class="nav-link">Why Us</a></li>
+                <li><a href="math-problems.html" class="nav-link" style="color:var(--primary-color)">Math Problems</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact Us</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="math-hero">
+        <div class="container">
+            <div class="grade-badge">🇺🇸 4th Grade · USA Common Core</div>
+            <h1>Grade 4 <span>Math Word Problems</span></h1>
+            <p>Real-world math challenges for 4th graders. Read each problem carefully, choose the best answer, and learn from the explanation!</p>
+            <div class="score-board" id="liveScoreBoard">
+                <div class="score-item">
+                    <div class="score-number" id="liveCorrect">0</div>
+                    <div class="score-label">Correct</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-number" id="liveTotal">0</div>
+                    <div class="score-label">Answered</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-number" id="livePct">0%</div>
+                    <div class="score-label">Score</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quiz Section -->
+    <section class="quiz-section">
+        <div class="quiz-wrapper">
+            <div class="question-counter" id="questionCounter">Question 1 of 10</div>
+            <div class="progress-bar-wrap">
+                <div class="progress-bar-fill" id="progressBar"></div>
+            </div>
+
+            <!-- ── Q1 ── -->
+            <div class="question-card active" id="q1">
+                <div class="question-topic">Addition &amp; Subtraction</div>
+                <div class="question-illustration">🍎</div>
+                <p class="question-text">
+                    Emma had 348 apples in her fruit stand. She sold 127 apples in the morning and 89 apples in the afternoon.
+                    How many apples does Emma have left?
+                </p>
+                <div class="options-grid">
+                    <button class="option-btn" data-value="a" onclick="selectAnswer(1,'a')">
+                        <span class="option-letter">A</span> 132 apples
+                    </button>
+                    <button class="option-btn" data-value="b" onclick="selectAnswer(1,'b')">
+                        <span class="option-letter">B</span> 142 apples
+                    </button>
+                    <button class="option-btn" data-value="c" onclick="selectAnswer(1,'c')">
+                        <span class="option-letter">C</span> 152 apples
+                    </button>
+                    <button class="option-btn" data-value="d" onclick="selectAnswer(1,'d')">
+                        <span class="option-letter">D</span> 216 apples
+                    </button>
+                </div>
+                <div class="feedback-box" id="fb1"></div>
+                <div class="quiz-nav">
+                    <span></span>
+                    <button class="btn-quiz btn-quiz-primary" id="next1" onclick="nextQuestion(1)" disabled>
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- ── Q2 ── -->
+            <div class="question-card" id="q2">
+                <div class="question-topic">Multiplication</div>
+                <div class="question-illustration">🚌</div>
+                <p class="question-text">
+                    A school has 6 buses. Each bus can carry 48 students.
+                    If all the buses are full, how many students are on the buses in total?
+                </p>
+                <div class="options-grid">
+                    <button class="option-btn" data-value="a" onclick="selectAnswer(2,'a')">
+                        <span class="option-letter">A</span> 248 students
+                    </button>
+                    <button class="option-btn" data-value="b" onclick="selectAnswer(2,'b')">
+                        <span class="option-letter">B</span> 288 students
+                    </button>
+                    <button class="option-btn" data-value="c" onclick="selectAnswer(2,'c')">
+                        <span class="option-letter">C</span> 298 students
+                    </button>
+                    <button class="option-btn" data-value="d" onclick="selectAnswer(2,'d')">
+                        <span class="option-letter">D</span> 308 students
+                    </button>
+                </div>
+                <div class="feedback-box" id="fb2"></div>
+                <div class="quiz-nav">
+                    <button class="btn-quiz btn-quiz-secondary" onclick="prevQuestion(2)">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+                    <button class="btn-quiz btn-quiz-primary" id="next2" onclick="nextQuestion(2)" disabled>
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- ── Q3 ── -->
+            <div class="question-card" id="q3">
+                <div class="question-topic">Division</div>
+                <div class="question-illustration">🍕</div>
+                <p class="question-text">
+                    A class of 32 students wants to split into equal groups for a pizza party.
+                    They can choose groups of 4, 5, 6, or 7 students. Which group size divides
+                    the class into equal groups with no students left over?
+                </p>
+                <div class="options-grid">
+                    <button class="option-btn" data-value="a" onclick="selectAnswer(3,'a')">
+                        <span class="option-letter">A</span> 5 students per group
+                    </button>
+                    <button class="option-btn" data-value="b" onclick="selectAnswer(3,'b')">
+                        <span class="option-letter">B</span> 6 students per group
+                    </button>
+                    <button class="option-btn" data-value="c" onclick="selectAnswer(3,'c')">
+                        <span class="option-letter">C</span> 4 students per group
+                    </button>
+                    <button class="option-btn" data-value="d" onclick="selectAnswer(3,'d')">
+                        <span class="option-letter">D</span> 7 students per group
+                    </button>
+                </div>
+                <div class="feedback-box" id="fb3"></div>
+                <div class="quiz-nav">
+                    <button class="btn-quiz btn-quiz-secondary" onclick="prevQuestion(3)">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+                    <button class="btn-quiz btn-quiz-primary" id="next3" onclick="nextQuestion(3)" disabled>
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- ── Q4 ── -->
+            <div class="question-card" id="q4">
+                <div class="question-topic">Fractions</div>
+                <div class="question-illustration">🎂</div>
+                <p class="question-text">
+                    At a birthday party, a cake was cut into 8 equal slices. 
+                    Marcus ate 3 slices and his sister ate 2 slices.
+                    What fraction of the cake is left?
+                </p>
+                <div class="options-grid">
+                    <button class="option-btn" data-value="a" onclick="selectAnswer(4,'a')">
+                        <span class="option-letter">A</span> 3/8
+                    </button>
+                    <button class="option-btn" data-value="b" onclick="selectAnswer(4,'b')">
+                        <span class="option-letter">B</span> 5/8
+                    </button>
+                    <button class="option-btn" data-value="c" onclick="selectAnswer(4,'c')">
+                        <span class="option-letter">C</span> 1/2
+                    </button>
+                    <button class="option-btn" data-value="d" onclick="selectAnswer(4,'d')">
+                        <span class="option-letter">D</span> 2/8
+                    </button>
+                </div>
+                <div class="feedback-box" id="fb4"></div>
+                <div class="quiz-nav">
+                    <button class="btn-quiz btn-quiz-secondary" onclick="prevQuestion(4)">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+                    <button class="btn-quiz btn-quiz-primary" id="next4" onclick="nextQuestion(4)" disabled>
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- ── Q5 ── -->
+            <div class="question-card" id="q5">
+                <div class="question-topic">Area &amp; Perimeter</div>
+                <div class="question-illustration">🌿</div>
+                <p class="question-text">
+                    Lily is planting a rectangular vegetable garden that is 9 feet long and 6 feet wide.
+                    She wants to put a fence around the entire garden. How many feet of fencing does she need?
+                </p>
+                <div class="options-grid">
+                    <button class="option-btn" data-value="a" onclick="selectAnswer(5,'a')">
+                        <span class="option-letter">A</span> 30 feet
+                    </button>
+                    <button class="option-btn" data-value="b" onclick="selectAnswer(5,'b')">
+                        <span class="option-letter">B</span> 54 feet
+                    </button>
+                    <button class="option-btn" data-value="c" onclick="selectAnswer(5,'c')">
+                        <span class="option-letter">C</span> 15 feet
+                    </button>
+                    <button class="option-btn" data-value="d" onclick="selectAnswer(5,'d')">
+                        <span class="option-letter">D</span> 45 feet
+                    </button>
+                </div>
+                <div class="feedback-box" id="fb5"></div>
+                <div class="quiz-nav">
+                    <button class="btn-quiz btn-quiz-secondary" onclick="prevQuestion(5)">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+                    <button class="btn-quiz btn-quiz-primary" id="next5" onclick="nextQuestion(5)" disabled>
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- ── Q6 ── -->
+            <div class="question-card" id="q6">
+                <div class="question-topic">Multi-Step Problem</div>
+                <div class="question-illustration">💰</div>
+                <p class="question-text">
+                    Tyler saves $15 each week from his allowance. He has already saved $45.
+                    He wants to buy a video game that costs $120. How many more weeks does
+                    Tyler need to save to have enough money?
+                </p>
+                <div class="options-grid">
+                    <button class="option-btn" data-value="a" onclick="selectAnswer(6,'a')">
+                        <span class="option-letter">A</span> 3 weeks
+                    </button>
+                    <button class="option-btn" data-value="b" onclick="selectAnswer(6,'b')">
+                        <span class="option-letter">B</span> 4 weeks
+                    </button>
+                    <button class="option-btn" data-value="c" onclick="selectAnswer(6,'c')">
+                        <span class="option-letter">C</span> 5 weeks
+                    </button>
+                    <button class="option-btn" data-value="d" onclick="selectAnswer(6,'d')">
+                        <span class="option-letter">D</span> 8 weeks
+                    </button>
+                </div>
+                <div class="feedback-box" id="fb6"></div>
+                <div class="quiz-nav">
+                    <button class="btn-quiz btn-quiz-secondary" onclick="prevQuestion(6)">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+                    <button class="btn-quiz btn-quiz-primary" id="next6" onclick="nextQuestion(6)" disabled>
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- ── Q7 ── -->
+            <div class="question-card" id="q7">
+                <div class="question-topic">Measurement &amp; Units</div>
+                <div class="question-illustration">🥛</div>
+                <p class="question-text">
+                    A recipe needs 3 cups of milk. Mrs. Johnson only has a
+                    1/4-cup measuring cup. How many times does she need to fill
+                    the 1/4-cup measuring cup to get exactly 3 cups of milk?
+                </p>
+                <div class="options-grid">
+                    <button class="option-btn" data-value="a" onclick="selectAnswer(7,'a')">
+                        <span class="option-letter">A</span> 8 times
+                    </button>
+                    <button class="option-btn" data-value="b" onclick="selectAnswer(7,'b')">
+                        <span class="option-letter">B</span> 10 times
+                    </button>
+                    <button class="option-btn" data-value="c" onclick="selectAnswer(7,'c')">
+                        <span class="option-letter">C</span> 12 times
+                    </button>
+                    <button class="option-btn" data-value="d" onclick="selectAnswer(7,'d')">
+                        <span class="option-letter">D</span> 16 times
+                    </button>
+                </div>
+                <div class="feedback-box" id="fb7"></div>
+                <div class="quiz-nav">
+                    <button class="btn-quiz btn-quiz-secondary" onclick="prevQuestion(7)">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+                    <button class="btn-quiz btn-quiz-primary" id="next7" onclick="nextQuestion(7)" disabled>
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- ── Q8 ── -->
+            <div class="question-card" id="q8">
+                <div class="question-topic">Patterns &amp; Number Sense</div>
+                <div class="question-illustration">🌟</div>
+                <p class="question-text">
+                    A library gets new books every week. In week 1 it had 120 books,
+                    in week 2 it had 165 books, in week 3 it had 210 books, and
+                    in week 4 it had 255 books. How many books will the library have in week 5?
+                </p>
+                <div class="options-grid">
+                    <button class="option-btn" data-value="a" onclick="selectAnswer(8,'a')">
+                        <span class="option-letter">A</span> 290 books
+                    </button>
+                    <button class="option-btn" data-value="b" onclick="selectAnswer(8,'b')">
+                        <span class="option-letter">B</span> 295 books
+                    </button>
+                    <button class="option-btn" data-value="c" onclick="selectAnswer(8,'c')">
+                        <span class="option-letter">C</span> 300 books
+                    </button>
+                    <button class="option-btn" data-value="d" onclick="selectAnswer(8,'d')">
+                        <span class="option-letter">D</span> 305 books
+                    </button>
+                </div>
+                <div class="feedback-box" id="fb8"></div>
+                <div class="quiz-nav">
+                    <button class="btn-quiz btn-quiz-secondary" onclick="prevQuestion(8)">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+                    <button class="btn-quiz btn-quiz-primary" id="next8" onclick="nextQuestion(8)" disabled>
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- ── Q9 ── -->
+            <div class="question-card" id="q9">
+                <div class="question-topic">Time</div>
+                <div class="question-illustration">⏰</div>
+                <p class="question-text">
+                    School starts at 8:15 AM. The school day is 6 hours and 45 minutes long.
+                    What time does school end?
+                </p>
+                <div class="options-grid">
+                    <button class="option-btn" data-value="a" onclick="selectAnswer(9,'a')">
+                        <span class="option-letter">A</span> 2:45 PM
+                    </button>
+                    <button class="option-btn" data-value="b" onclick="selectAnswer(9,'b')">
+                        <span class="option-letter">B</span> 3:00 PM
+                    </button>
+                    <button class="option-btn" data-value="c" onclick="selectAnswer(9,'c')">
+                        <span class="option-letter">C</span> 3:15 PM
+                    </button>
+                    <button class="option-btn" data-value="d" onclick="selectAnswer(9,'d')">
+                        <span class="option-letter">D</span> 3:30 PM
+                    </button>
+                </div>
+                <div class="feedback-box" id="fb9"></div>
+                <div class="quiz-nav">
+                    <button class="btn-quiz btn-quiz-secondary" onclick="prevQuestion(9)">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+                    <button class="btn-quiz btn-quiz-primary" id="next9" onclick="nextQuestion(9)" disabled>
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- ── Q10 ── -->
+            <div class="question-card" id="q10">
+                <div class="question-topic">Multi-Step · Mixed Operations</div>
+                <div class="question-illustration">🏪</div>
+                <p class="question-text">
+                    At the school store, notebooks cost $3 each and pencil packs cost $2 each.
+                    Sofia bought 4 notebooks and 3 pencil packs. She paid with a $25 bill.
+                    How much change did Sofia receive?
+                </p>
+                <div class="options-grid">
+                    <button class="option-btn" data-value="a" onclick="selectAnswer(10,'a')">
+                        <span class="option-letter">A</span> $5
+                    </button>
+                    <button class="option-btn" data-value="b" onclick="selectAnswer(10,'b')">
+                        <span class="option-letter">B</span> $7
+                    </button>
+                    <button class="option-btn" data-value="c" onclick="selectAnswer(10,'c')">
+                        <span class="option-letter">C</span> $9
+                    </button>
+                    <button class="option-btn" data-value="d" onclick="selectAnswer(10,'d')">
+                        <span class="option-letter">D</span> $11
+                    </button>
+                </div>
+                <div class="feedback-box" id="fb10"></div>
+                <div class="quiz-nav">
+                    <button class="btn-quiz btn-quiz-secondary" onclick="prevQuestion(10)">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+                    <button class="btn-quiz btn-quiz-primary" id="next10" onclick="finishQuiz()" disabled>
+                        Finish Quiz <i class="fas fa-flag-checkered"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- ── Results ── -->
+            <div class="results-screen" id="resultsScreen">
+                <div class="results-emoji" id="resultsEmoji">🏆</div>
+                <h2 id="resultsTitle">Quiz Complete!</h2>
+                <div class="results-score-big" id="resultsScoreBig"></div>
+                <p id="resultsMessage"></p>
+                <div class="results-breakdown">
+                    <div class="rb-item">
+                        <div class="rb-num green" id="rbCorrect">0</div>
+                        <div class="rb-label">Correct</div>
+                    </div>
+                    <div class="rb-item">
+                        <div class="rb-num red" id="rbWrong">0</div>
+                        <div class="rb-label">Incorrect</div>
+                    </div>
+                    <div class="rb-item">
+                        <div class="rb-num" id="rbTotal" style="color:#1E40AF">10</div>
+                        <div class="rb-label">Total</div>
+                    </div>
+                </div>
+                <button class="btn-quiz btn-quiz-primary" onclick="restartQuiz()" style="margin-top:1rem">
+                    <i class="fas fa-redo"></i> Try Again
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Study Tips -->
+    <section class="tips-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>📚 Study Tips for Grade 4 Math</h2>
+                <p>Follow these strategies to become a math superstar!</p>
+            </div>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <div class="tip-icon">📖</div>
+                    <h4>Read Carefully</h4>
+                    <p>Always read the whole problem before trying to solve it. Look for key words like <em>total</em>, <em>left over</em>, <em>each</em>, and <em>in all</em>.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">✏️</div>
+                    <h4>Show Your Work</h4>
+                    <p>Write out every step. Drawing a picture or diagram can make tricky problems much easier to understand.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">🔢</div>
+                    <h4>Check Your Answer</h4>
+                    <p>Use the opposite operation to check. If you added, try subtracting. If you multiplied, try dividing!</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">🌍</div>
+                    <h4>Think Real-World</h4>
+                    <p>Connect math to everyday life — counting money, measuring recipes, or tracking sports scores all use the same skills.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <img src="images/logo.jpeg" alt="Vap Tech Solutions" class="footer-logo">
+                    <p>Leading AI Development and Software Solutions Provider. Transforming businesses through innovative technology solutions.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#">AI Development</a></li>
+                        <li><a href="#">Mobile Apps</a></li>
+                        <li><a href="#">Web Development</a></li>
+                        <li><a href="#">Data Analytics</a></li>
+                        <li><a href="#">IoT Solutions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="math-problems.html">Grade 4 Math</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Vap Tech Solutions. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    // ─── Quiz Data ────────────────────────────────────────────────────────────
+    // correct answer key and explanation for each question
+    const ANSWERS = {
+        1: { correct: 'a', explanation: '348 − 127 = 221, then 221 − 89 = 132 apples remaining.' },
+        2: { correct: 'b', explanation: '6 buses × 48 students = 288 students in total.' },
+        3: { correct: 'c', explanation: '32 ÷ 4 = 8 groups with no remainder. 32 ÷ 5 = 6 R2; 32 ÷ 6 = 5 R2; 32 ÷ 7 = 4 R4.' },
+        4: { correct: 'a', explanation: 'Marcus ate 3 slices and his sister ate 2, so 5 slices were eaten. 8 − 5 = 3 slices left, which is 3/8 of the cake.' },
+        5: { correct: 'a', explanation: 'Perimeter = 2 × (length + width) = 2 × (9 + 6) = 2 × 15 = 30 feet.' },
+        6: { correct: 'c', explanation: 'Tyler still needs $120 − $45 = $75. At $15 per week, $75 ÷ $15 = 5 more weeks.' },
+        7: { correct: 'c', explanation: 'Each cup = 4 quarter-cups. 3 cups × 4 = 12 fills.' },
+        8: { correct: 'c', explanation: 'The pattern increases by 45 each week (165−120=45). Week 5: 255 + 45 = 300 books.' },
+        9: { correct: 'b', explanation: '8:15 AM + 6 hours = 2:15 PM, then + 45 minutes = 3:00 PM.' },
+        10: { correct: 'b', explanation: '4 notebooks × $3 = $12; 3 pencil packs × $2 = $6; total = $18. Change = $25 − $18 = $7.' }
+    };
+
+    const TOTAL = 10;
+    let answered = {};   // { qNum: selectedValue }
+    let correct  = 0;
+
+    // ─── Select an answer ────────────────────────────────────────────────────
+    function selectAnswer(qNum, selected) {
+        if (answered[qNum]) return;   // already answered
+
+        answered[qNum] = selected;
+        const data = ANSWERS[qNum];
+        const card = document.getElementById('q' + qNum);
+        const buttons = card.querySelectorAll('.option-btn');
+        const feedback = document.getElementById('fb' + qNum);
+        const isCorrect = selected === data.correct;
+
+        if (isCorrect) correct++;
+
+        buttons.forEach(btn => {
+            btn.disabled = true;
+            if (btn.dataset.value === data.correct) btn.classList.add('correct');
+            if (btn.dataset.value === selected && !isCorrect) btn.classList.add('wrong');
+        });
+
+        feedback.className = 'feedback-box ' + (isCorrect ? 'correct' : 'wrong');
+        feedback.innerHTML = isCorrect
+            ? '<strong>✅ Correct!</strong>' + data.explanation
+            : '<strong>❌ Not quite.</strong>' + data.explanation;
+
+        document.getElementById('next' + qNum).disabled = false;
+        updateScoreBoard();
+    }
+
+    // ─── Navigate forward ────────────────────────────────────────────────────
+    function nextQuestion(qNum) {
+        document.getElementById('q' + qNum).classList.remove('active');
+        document.getElementById('q' + (qNum + 1)).classList.add('active');
+        updateProgress(qNum + 1);
+    }
+
+    // ─── Navigate backward ───────────────────────────────────────────────────
+    function prevQuestion(qNum) {
+        document.getElementById('q' + qNum).classList.remove('active');
+        document.getElementById('q' + (qNum - 1)).classList.add('active');
+        updateProgress(qNum - 1);
+    }
+
+    // ─── Finish quiz ─────────────────────────────────────────────────────────
+    function finishQuiz() {
+        document.getElementById('q10').classList.remove('active');
+        const resultsScreen = document.getElementById('resultsScreen');
+        resultsScreen.classList.add('show');
+
+        const pct = Math.round((correct / TOTAL) * 100);
+        document.getElementById('resultsScoreBig').textContent = pct + '%';
+        document.getElementById('rbCorrect').textContent = correct;
+        document.getElementById('rbWrong').textContent    = TOTAL - correct;
+
+        let emoji, title, msg;
+        if (pct === 100) {
+            emoji = '🏆'; title = 'Perfect Score!';
+            msg = 'Amazing work! You got every question right. You are a math superstar! 🌟';
+        } else if (pct >= 80) {
+            emoji = '😊'; title = 'Great Job!';
+            msg = 'You did really well! Review the questions you missed and keep practicing.';
+        } else if (pct >= 60) {
+            emoji = '👍'; title = 'Good Effort!';
+            msg = 'You\'re on the right track! Read the explanations and try again to improve your score.';
+        } else {
+            emoji = '📚'; title = 'Keep Practicing!';
+            msg = 'Math takes practice! Review the study tips below and give it another try.';
+        }
+
+        document.getElementById('resultsEmoji').textContent   = emoji;
+        document.getElementById('resultsTitle').textContent   = title;
+        document.getElementById('resultsMessage').textContent = msg;
+    }
+
+    // ─── Restart ─────────────────────────────────────────────────────────────
+    function restartQuiz() {
+        answered = {};
+        correct  = 0;
+
+        // Reset all cards
+        for (let i = 1; i <= TOTAL; i++) {
+            const card = document.getElementById('q' + i);
+            card.classList.remove('active');
+            card.querySelectorAll('.option-btn').forEach(btn => {
+                btn.disabled = false;
+                btn.classList.remove('correct', 'wrong');
+            });
+            const fb = document.getElementById('fb' + i);
+            fb.className = 'feedback-box';
+            fb.innerHTML = '';
+            const nextBtn = document.getElementById('next' + i);
+            if (nextBtn) nextBtn.disabled = true;
+        }
+
+        document.getElementById('resultsScreen').classList.remove('show');
+        document.getElementById('q1').classList.add('active');
+        updateProgress(1);
+        updateScoreBoard();
+    }
+
+    // ─── UI helpers ──────────────────────────────────────────────────────────
+    function updateProgress(qNum) {
+        const pct = ((qNum - 1) / TOTAL) * 100;
+        document.getElementById('progressBar').style.width = pct + '%';
+        document.getElementById('questionCounter').textContent =
+            'Question ' + qNum + ' of ' + TOTAL;
+    }
+
+    function updateScoreBoard() {
+        const totalAnswered = Object.keys(answered).length;
+        const pct = totalAnswered > 0 ? Math.round((correct / totalAnswered) * 100) : 0;
+        document.getElementById('liveCorrect').textContent = correct;
+        document.getElementById('liveTotal').textContent   = totalAnswered;
+        document.getElementById('livePct').textContent     = pct + '%';
+    }
+
+    // ─── Hamburger nav (reuse existing pattern) ───────────────────────────────
+    const hamburger = document.getElementById('hamburger');
+    const navMenu   = document.getElementById('navMenu');
+    hamburger.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        hamburger.classList.toggle('active');
+    });
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            hamburger.classList.remove('active');
+        });
+    });
+
+    // ─── Navbar scroll effect ────────────────────────────────────────────────
+    const navbar = document.querySelector('.navbar');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 100) {
+            navbar.style.boxShadow = '0 5px 30px rgba(0, 0, 0, 0.15)';
+        } else {
+            navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+        }
+    });
+
+    // ─── Page load fade-in ───────────────────────────────────────────────────
+    window.addEventListener('load', () => {
+        document.body.style.opacity = '0';
+        document.body.style.transition = 'opacity 0.5s ease';
+        setTimeout(() => { document.body.style.opacity = '1'; }, 100);
+    });
+    </script>
+</body>
+</html>
